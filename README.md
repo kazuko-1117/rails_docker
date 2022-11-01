@@ -15,41 +15,54 @@
 ```
 git clone https://github.com/kazuko-1117/rails_docker
 ```
+<br />
 
 ### ルートディレクトリに移動
 ```console
 cd rails_docker
 ```
-### コンテナを作り、Laravelのプロジェクトを作成
+<br />
+
+### コンテナを作り、Railsの雛形を作成
 ```console
-docker-compose run php composer create-project --prefer-dist laravel/laravel .
+docker-compose run web rails new . --force --database=mysql
 ```
+<br />
+
+### imageをビルドし直す
+```console
+docker-compose build
+```
+<br />
+
+### config/database.ymlをdocker-compose.ymlで設定した値に変更する
+```
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: password
+  host: db
+```
+<br />
+
+### コンテナの中にデータベースを作る
+```console
+docker-compose run web rails db:create
+```
+<br />
+
 ### コンテナをバックグラウンドで起動
 ```console
 docker-compose up -d
 ```
-### ブラウザでLaravelのwelcomeページを確認
-`http://localhost:8080`
 <br />
-<br />
-### `.env`ファイルをdocker-compose.ymlで設定した値に変更する
-```
-DB_CONNECTION=mysql
-DB_HOST=db
-DB_PORT=3306
-DB_DATABASE=laravel_db
-DB_USERNAME=laravel_user
-DB_PASSWORD=laravel_pass
-```
 
-### コンテナに入る
-```console
-docker exec -it laravel_php /bin/bash
-```
-### データベースの接続を確認
-```console
-php artisan migrate
-```
+### ブラウザでRailsのwelcomeページを確認
+`http://localhost:3000`
+
+
 
 
 
