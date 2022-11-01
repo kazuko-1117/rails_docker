@@ -13,12 +13,12 @@
 [参考](https://qiita.com/ama_keshi/items/b4c47a4aca5d48f2661c)
 ### 任意のディレクトリにリポジトリをクローン
 ```
-git clone https://github.com/kazuko-1117/Docker-test.git
+git clone https://github.com/kazuko-1117/rails_docker
 ```
 
 ### ルートディレクトリに移動
 ```console
-cd Docker-test
+cd rails_docker
 ```
 ### コンテナを作り、Laravelのプロジェクトを作成
 ```console
